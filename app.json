@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "BRQ Movies",
+    "slug": "BRQMovies",
+    "scheme": "com.brqmovies",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "backgroundColor": "#16171B",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#16171B"
+    },
+    "ios": {
+      "bundleIdentifier": "com.brqmovies",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.brqmovies"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-asset"
+    ]
+  }
+}
