@@ -1,25 +1,29 @@
-import React, { useState } from "react";
-import { FlatList, Image, View } from "react-native";
-import { Contain, Container, Space } from "./movie.styles";
-import { StatusBar } from "expo-status-bar";
 import {
     StackActions,
     useNavigation,
     useRoute,
 } from "@react-navigation/native";
 import { TextDefault } from "app/shared/components/texts/text-default/text-default.component";
-import { Movie as Movies } from "../../components/cards/movie-card.component";
 import { COLOR_LIGHT } from "app/shared/design/colors/colorLight.colors";
+import { mockCardsInfo } from "app/shared/utils/mock/mock.utils";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { FlatList, Image, View } from "react-native";
 import { IconButton } from "react-native-paper";
+import { RFValue } from "react-native-responsive-fontsize";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
     CustomCard,
     CustomCardProps,
 } from "../../components/cards/custom-card.component";
-import { mockCardsInfo } from "app/shared/utils/mock/mock.utils";
+import { Movie as Movies } from "../../components/cards/movie-card.component";
 import { useFavoriteStore } from "../../store/useFavorite";
+import { Contain, Container, Space } from "./movie.styles";
 
 const Movie: React.FC = () => {
     const { dispatch } = useNavigation();
+    const { top } = useSafeAreaInsets();
+    const height = RFValue(10) + top;
     const route = useRoute();
     const { movie } = route.params as { movie: Movies };
     const { favorites, addFavorite, removeFavorite } = useFavoriteStore();
@@ -53,10 +57,17 @@ const Movie: React.FC = () => {
     const ListHeaderComponent = () => (
         <View>
             <StatusBar style="light" />
+
+            <Image
+                source={{
+                    uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                }}
+                style={{ width: "100%", height: 526 }}
+            />
             <IconButton
                 style={{
                     position: "absolute",
-                    top: 20,
+                    top: height,
                     left: 10,
                     zIndex: 10,
                 }}
@@ -69,7 +80,7 @@ const Movie: React.FC = () => {
             <IconButton
                 style={{
                     position: "absolute",
-                    top: 20,
+                    top: height,
                     right: 10,
                     zIndex: 10,
                 }}
@@ -82,12 +93,6 @@ const Movie: React.FC = () => {
                 size={24}
                 icon="heart"
                 onPress={handleFavorite}
-            />
-            <Image
-                source={{
-                    uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-                }}
-                style={{ width: "100%", height: 526 }}
             />
             <Contain>
                 <TextDefault

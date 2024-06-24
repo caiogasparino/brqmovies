@@ -8,8 +8,6 @@ interface MovieStoreState {
     fetchMovies: () => void;
 }
 
-const apiKey = process.env.REACT_APP_API_KEY;
-
 export const useMovieStore = create<MovieStoreState>((set) => ({
     movies: [],
     loading: false,
@@ -22,7 +20,7 @@ export const useMovieStore = create<MovieStoreState>((set) => ({
                 url: "/movie/popular?language=en-US&page=1",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${apiKey}`,
+                    Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
                 },
             });
             set({ movies: data.results, loading: false });

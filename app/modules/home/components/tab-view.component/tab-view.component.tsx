@@ -1,36 +1,40 @@
+import { StackActions, useNavigation } from "@react-navigation/native";
+import { TextDefault } from "app/shared/components/texts/text-default/text-default.component";
+import { COLOR_LIGHT } from "app/shared/design/colors/colorLight.colors";
 import * as React from "react";
 import {
     FlatList,
     PressableAndroidRippleConfig,
     StyleProp,
+    StyleSheet,
     TextStyle,
     View,
     ViewStyle,
-    StyleSheet,
     useWindowDimensions,
 } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+import { RFValue } from "react-native-responsive-fontsize";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import {
-    TabView,
-    SceneMap,
-    TabBar,
     NavigationState,
     Route,
+    SceneMap,
     SceneRendererProps,
+    TabBar,
     TabBarIndicatorProps,
     TabBarItemProps,
+    TabView,
 } from "react-native-tab-view";
-import { Container } from "./tab-view.styles";
-import { Scene, Event } from "react-native-tab-view/lib/typescript/src/types";
+import { Event, Scene } from "react-native-tab-view/lib/typescript/src/types";
 import { JSX } from "react/jsx-runtime";
-import { COLOR_LIGHT } from "app/shared/design/colors/colorLight.colors";
-import { ActivityIndicator } from "react-native-paper";
-import { TextDefault } from "app/shared/components/texts/text-default/text-default.component";
-import { MovieCard, Movie } from "../cards/movie-card.component";
-import { useMovieStore } from "../../store/useMoviesStore";
-import { StackActions, useNavigation } from "@react-navigation/native";
 import { useFavoriteStore } from "../../store/useFavorite";
+import { useMovieStore } from "../../store/useMoviesStore";
+import { Movie, MovieCard } from "../cards/movie-card.component";
+import { Container } from "./tab-view.styles";
 
 export default function TabViewComponent() {
+    const { top } = useSafeAreaInsets();
+    const height = RFValue(60) + top;
     const layout = useWindowDimensions();
     const { dispatch } = useNavigation();
     const { movies, loading, error } = useMovieStore();
@@ -182,7 +186,7 @@ export default function TabViewComponent() {
                 navigationState={{ index, routes }}
                 renderScene={renderScene}
                 renderTabBar={renderTabBar}
-                style={{ marginTop: 100 }}
+                style={{ marginTop: height }}
                 onIndexChange={setIndex}
                 initialLayout={{ width: layout.width }}
             />

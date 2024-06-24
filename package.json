@@ -17,7 +17,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
     ],
-    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"]
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ]
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",
@@ -63,6 +65,7 @@
     "@types/styled-components": "^5.1.34",
     "babel-plugin-import-glob": "^2.0.0",
     "babel-plugin-module-resolver": "^5.0.2",
+    "dotenv": "^16.4.5",
     "eslint": "^9.5.0",
     "eslint-config-expo": "^7.1.2",
     "eslint-config-prettier": "^9.1.0",
