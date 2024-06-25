@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components/native";
 import { TextInput } from "react-native-paper";
+import styled, { css } from "styled-components/native";
 
 export type INPUT_VARIANT = "PRIMARY" | "SECONDARY" | "TERTIARY";
 
 type InputProps = {
-    variant: INPUT_VARIANT;
+    variant?: INPUT_VARIANT;
 };
 
 export const Input = styled(TextInput)<InputProps>`

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StackActions, useNavigation } from "@react-navigation/native";
-import { TouchableOpacity, Alert } from "react-native";
 import LogoSvg from "app/modules/home/assets/svgs/app-icon.svg";
 import { InputCustom } from "app/shared/components/input/input.component";
 import { TextDefault } from "app/shared/components/texts/text-default/text-default.component";
+import { COLOR_LIGHT } from "app/shared/design/colors/colorLight.colors";
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { Alert, TouchableOpacity } from "react-native";
 import {
     ButtonStyle,
     Container,
@@ -12,7 +13,6 @@ import {
     InputContainer,
     RecoveryContainer,
 } from "./login.styles";
-import { COLOR_LIGHT } from "app/shared/design/colors/colorLight.colors";
 
 const Login: React.FC = () => {
     const { dispatch } = useNavigation();
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
         }
 
         if (username && password) {
-            dispatch(StackActions.replace("Home"));
+            dispatch(StackActions.replace("HomeScreen"));
         }
     };
 
@@ -96,6 +96,7 @@ const Login: React.FC = () => {
             <InputContainer>
                 {usernameError && renderErrorText(usernameError)}
                 <InputCustom
+                    testID="input-username"
                     placeholder={focusUser ? " " : "Usuário"}
                     label={focusUser ? "Usuário" : undefined}
                     onFocus={() => handleFocusUser(true)}
@@ -109,7 +110,7 @@ const Login: React.FC = () => {
                     value={username}
                     error={!!usernameError}
                     leftIcon
-                    leftIconName="person-outline"
+                    leftIconName="account"
                     rightIcon={!!username}
                     rightIconName="close-circle"
                     colorIcon={COLOR_LIGHT.BASE[100]}
@@ -131,6 +132,7 @@ const Login: React.FC = () => {
 
                 {passwordError && renderErrorText(passwordError)}
                 <InputCustom
+                    testID="custom-input-password"
                     placeholder={focusPassword ? " " : "Senha"}
                     label={focusPassword ? "Senha" : undefined}
                     onFocus={() => handleFocusPassword(true)}
@@ -145,7 +147,7 @@ const Login: React.FC = () => {
                     error={!!passwordError}
                     secureTextEntry
                     leftIcon
-                    leftIconName="lock-closed"
+                    leftIconName="lock-outline"
                     rightIcon={!!password}
                     rightIconName="close-circle"
                     textColor={COLOR_LIGHT.BASE[100]}

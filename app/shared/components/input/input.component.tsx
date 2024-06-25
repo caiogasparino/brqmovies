@@ -1,16 +1,18 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { TextInput } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
 import { Input } from "./input.styles";
 
 interface InputProps extends React.ComponentProps<typeof Input> {
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
-    leftIconName?: keyof typeof Ionicons.glyphMap;
-    rightIconName?: keyof typeof Ionicons.glyphMap;
+    leftIconName?: keyof typeof MaterialCommunityIcons.glyphMap;
+    rightIconName?: keyof typeof MaterialCommunityIcons.glyphMap;
     colorIcon?: string;
     secureTextEntry?: boolean;
     value?: string;
+    testID?: string;
+    onPress?: () => void;
 }
 
 const InputCustom: React.FC<InputProps> = ({
@@ -24,19 +26,18 @@ const InputCustom: React.FC<InputProps> = ({
     value,
     onPress,
     onChangeText,
+    testID,
     ...props
 }) => {
     const renderLeftIcon = () => {
         if (leftIcon) {
             return (
                 <TextInput.Icon
-                    icon={() => (
-                        <Ionicons
-                            name={leftIconName}
-                            size={24}
-                            color={colorIcon}
-                        />
-                    )}
+                    testID={`${testID}-left-icon`}
+                    icon={
+                        leftIconName as keyof typeof MaterialCommunityIcons.glyphMap
+                    }
+                    color={colorIcon}
                 />
             );
         }
@@ -47,14 +48,12 @@ const InputCustom: React.FC<InputProps> = ({
         if (rightIcon) {
             return (
                 <TextInput.Icon
+                    testID={`${testID}-right-icon`}
+                    icon={
+                        rightIconName as keyof typeof MaterialCommunityIcons.glyphMap
+                    }
+                    color={colorIcon}
                     onPress={onPress}
-                    icon={() => (
-                        <Ionicons
-                            name={rightIconName}
-                            size={24}
-                            color={colorIcon}
-                        />
-                    )}
                 />
             );
         }
@@ -63,6 +62,7 @@ const InputCustom: React.FC<InputProps> = ({
 
     return (
         <Input
+            testID={testID}
             placeholder={placeholder}
             left={renderLeftIcon()}
             right={renderRightIcon()}
